@@ -67,10 +67,27 @@ function initializeServiceWorker() {
 async function getRecipes() {
   // EXPOSE - START (All expose numbers start with A)
   const oldrecipes = localStorage.getItem('recipes');
-  if(oldrecipes) return oldrecipes;
+  if(oldrecipes) return JSON.parse(oldrecipes);
   const recipes = [];
 
-
+  return new Promise(async (resolve,reject) => {
+    for(let i = 0;i < RECIPE_URLS.length;++i){
+      const url = RECIPE_URLS[i];
+      try{
+        let response = await fetch(url);
+        let data = await response.json();
+        recipes.push(data);
+        if(i === RECIPE_URLS.length - 1){
+          saveRecipesToStorage(recipes);
+          resolve(recipes);
+        }
+      } catch(error){
+        console.error(error);
+        reject(error);
+        return;
+      }
+    }
+  });
   // A1. TODO - Check local storage to see if there are any recipes.
   //            If there are recipes, return them.
   /**************************/
