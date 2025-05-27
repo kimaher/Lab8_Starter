@@ -66,6 +66,11 @@ function initializeServiceWorker() {
  */
 async function getRecipes() {
   // EXPOSE - START (All expose numbers start with A)
+  const oldrecipes = localStorage.getItem('recipes');
+  if(oldrecipes) return oldrecipes;
+  const recipes = [];
+
+
   // A1. TODO - Check local storage to see if there are any recipes.
   //            If there are recipes, return them.
   /**************************/
