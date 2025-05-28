@@ -3,7 +3,7 @@
     "short_name": "Kian Maher and Vincent Gao",
     "description": "A recipe web app",
     "start_url": "/index.html",
-    "display": "fullscreen",
+    "display": "fullscreen  ",
     "background_color": "green",
     "theme_color": "green",
     "icons": [
